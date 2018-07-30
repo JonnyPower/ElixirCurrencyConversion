@@ -12,7 +12,7 @@ defmodule CurrencyConversion do
       :world
 
   """
-  def hello do
-    :world
+  def convert(from_currency, to_currency, amount) do
+    Coinbase.get_latest_price(from_currency, to_currency) * amount
   end
 end
