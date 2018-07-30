@@ -13,6 +13,9 @@ defmodule CurrencyConversion do
 
   """
   def convert(from_currency, to_currency, amount) do
-    Coinbase.get_latest_price(from_currency, to_currency) * amount
+    case Coinbase.get_latest_price(from_currency, to_currency) do
+      %{price: price, direction: :given} -> amount * price
+      %{price: price, direction: :opposite} -> amount / price
+    end
   end
 end
